@@ -1,0 +1,50 @@
+---
+const fakta = [
+  { tall: '5', tekst: 'akser med frie vinkler over 30°' },
+  { tall: '12', tekst: 'blanks i automatisk materialskifter' },
+  { tall: '24 t', tekst: 'drift på full kapasitet uten oppsyn' },
+  { tall: 'Våt + tørr', tekst: 'bearbeiding med høy kvalitet' },
+];
+---
+
+<section id="digital-produksjon" class="py-20 lg:py-28">
+  <div class="container-page">
+    <div
+      class="relative overflow-hidden rounded-[2rem] bg-brand-900 px-6 py-14 text-white sm:px-12 lg:px-16 lg:py-20"
+      data-reveal="scale"
+    >
+      <div
+        aria-hidden="true"
+        class="float-slow absolute -right-24 -top-24 size-96 rounded-full bg-brand-500/30 blur-3xl"
+      ></div>
+
+      <div class="relative grid gap-12 lg:grid-cols-2">
+        <div>
+          <p class="eyebrow !text-brand-300">Digital produksjon</p>
+          <h2 class="mt-4 text-4xl sm:text-5xl">CORiTEC 350i Loader</h2>
+          <p class="mt-6 leading-relaxed text-brand-100">
+            Vår CORiTEC 350i Loader fresemaskin møter alle moderne krav for CAD/CAM prosessering. Den freser alle
+            materialer fra CoCr, titan, zirconium, plastikk mm, virtuelt uten restriksjoner.
+          </p>
+          <p class="mt-4 leading-relaxed text-brand-100">
+            Den integrerte automatiserte material skifteren lar maskinen gjøre jobben sin på full kapasitet, hele døgnet
+            uten oppsyn. Noe som er veldig kjekt med tidkrevende fresearbeid slik som store broer og partielle proteser.
+          </p>
+        </div>
+
+        <dl class="grid grid-cols-2 gap-4 self-center">
+          {fakta.map((f, i) => (
+            <div
+              class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
+              data-reveal
+              style={`--d: ${200 + i * 100}ms`}
+            >
+              <dt class="font-display text-3xl text-white">{f.tall}</dt>
+              <dd class="mt-2 text-sm leading-relaxed text-brand-200">{f.tekst}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>

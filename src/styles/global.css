@@ -1,0 +1,171 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/fraunces";
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces Variable", ui-serif, Georgia, serif;
+
+  /* Blåfargen er hentet fra logoen */
+  --color-brand-50: #f1f5fc;
+  --color-brand-100: #e0e9f8;
+  --color-brand-200: #c3d3f0;
+  --color-brand-300: #96b1e3;
+  --color-brand-400: #6388d2;
+  --color-brand-500: #4169c0;
+  --color-brand-600: #2f55a4;
+  --color-brand-700: #274485;
+  --color-brand-800: #223a6e;
+  --color-brand-900: #1a2b50;
+
+  --color-ink: #1b2436;
+  --color-muted: #5b6577;
+  --color-paper: #f8f7f4;
+  --color-line: #e6e3dc;
+
+  --shadow-soft: 0 1px 2px rgb(27 36 54 / 0.04), 0 12px 32px -12px rgb(27 36 54 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(27 36 54 / 0.05), 0 24px 48px -16px rgb(27 36 54 / 0.2);
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .container-page {
+    width: 100%;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-brand-600);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition:
+      transform 0.4s var(--ease-soft),
+      box-shadow 0.4s var(--ease-soft),
+      background-color 0.25s,
+      border-color 0.25s;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-primary {
+    background: var(--color-brand-600);
+    color: white;
+    box-shadow: 0 8px 24px -8px rgb(47 85 164 / 0.55);
+  }
+  .btn-primary:hover {
+    background: var(--color-brand-700);
+  }
+  .btn-ghost {
+    background: white;
+    border: 1px solid var(--color-line);
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-brand-300);
+  }
+
+  .card {
+    background: white;
+    border: 1px solid var(--color-line);
+    border-radius: 1.5rem;
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Tekst fra markdown på produktsidene */
+  .prose-produkt h2 {
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-produkt p {
+    color: var(--color-muted);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .prose-produkt strong {
+    color: var(--color-ink);
+  }
+}
+
+/* Scroll-animasjoner. Skjules kun når JS kjører (html.js), så innholdet
+   alltid er synlig uten JavaScript eller med redusert bevegelse. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  html.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.9s var(--ease-soft),
+      transform 0.9s var(--ease-soft);
+    transition-delay: var(--d, 0ms);
+  }
+  html.js [data-reveal="fade"] {
+    transform: none;
+  }
+  html.js [data-reveal="scale"] {
+    transform: scale(0.96);
+  }
+  html.js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .float-slow {
+    animation: float 9s ease-in-out infinite;
+  }
+  .float-slower {
+    animation: float 12s ease-in-out infinite reverse;
+  }
+  @keyframes float {
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+}

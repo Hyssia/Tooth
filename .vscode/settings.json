@@ -1,0 +1,18 @@
+{
+  // dist/ og .astro/ er generert av `astro build` og skal ikke redigeres
+  "files.exclude": {
+    "dist": true,
+    ".astro": true
+  },
+  "search.exclude": {
+    "dist": true,
+    ".astro": true,
+    "package-lock.json": true
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.documentSelectors": ["**/*.astro"]
+}

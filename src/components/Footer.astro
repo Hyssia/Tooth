@@ -1,0 +1,72 @@
+---
+import { getCollection } from 'astro:content';
+import { meny, site } from '../data/site';
+
+const produkter = (await getCollection('produkter')).sort((a, b) => a.data.rekkefolge - b.data.rekkefolge);
+---
+
+<footer class="mt-24 bg-brand-900 text-brand-100">
+  <div class="container-page grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="lg:col-span-1">
+      <p class="font-display text-xl text-white">{site.navn}</p>
+      <p class="mt-3 text-sm leading-relaxed text-brand-200">Autorisert tannteknisk laboratorium i Mosjøen.</p>
+    </div>
+
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-widest text-brand-300">Sider</p>
+      <ul class="mt-4 space-y-2 text-sm">
+        {meny.map((punkt) => (
+          <li>
+            <a href={punkt.href} class="hover:text-white">
+              {punkt.tekst}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-widest text-brand-300">Produkter</p>
+      <ul class="mt-4 space-y-2 text-sm">
+        {produkter.map((p) => (
+          <li>
+            <a href={`/${p.id}`} class="hover:text-white">
+              {p.data.tittel}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-widest text-brand-300">Kontakt</p>
+      <address class="mt-4 space-y-2 text-sm not-italic">
+        <p>
+          {site.adresse}
+          <br />
+          {site.poststed}
+        </p>
+        <p>
+          <a href={site.telefonLenke} class="hover:text-white">
+            {site.telefon}
+          </a>
+        </p>
+        <p>
+          <a href={`mailto:${site.epost}`} class="hover:text-white">
+            {site.epost}
+          </a>
+        </p>
+        <p>
+          <a href={site.facebook} rel="noopener" class="hover:text-white">
+            Facebook
+          </a>
+        </p>
+      </address>
+    </div>
+  </div>
+  <div class="border-t border-white/10">
+    <p class="container-page py-6 text-xs text-brand-300">
+      © {new Date().getFullYear()} {site.navn}
+    </p>
+  </div>
+</footer>

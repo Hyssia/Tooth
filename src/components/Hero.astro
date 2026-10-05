@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import kronebro from '../assets/produkter/kronebro.jpg';
+import implantat from '../assets/produkter/implantat.jpg';
+import proteser from '../assets/produkter/proteser.jpg';
+import { site } from '../data/site';
+---
+
+<section class="relative overflow-hidden pb-20 pt-36 lg:pb-32 lg:pt-48">
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+    <div class="float-slow absolute -right-32 -top-32 size-[34rem] rounded-full bg-brand-200/50 blur-3xl"></div>
+    <div class="float-slower absolute -left-40 top-64 size-[28rem] rounded-full bg-[#f0e6d6]/70 blur-3xl"></div>
+  </div>
+
+  <div class="container-page grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
+    <div>
+      <p class="eyebrow" data-reveal>
+        Autorisert tannteknisk laboratorium
+      </p>
+      <h1 class="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl" data-reveal style="--d: 80ms">
+        Tannteknikk av høy kvalitet, fra Mosjøen
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted" data-reveal style="--d: 160ms">
+        {site.beskrivelse}
+      </p>
+      <div class="mt-9 flex flex-wrap gap-3" data-reveal style="--d: 240ms">
+        <a href="/#kontakt" class="btn btn-primary">
+          Ta kontakt med oss i dag
+        </a>
+        <a href="/#produkter" class="btn btn-ghost">
+          Se produktene
+        </a>
+      </div>
+    </div>
+
+    <div class="relative mx-auto hidden aspect-square w-full max-w-md lg:block" aria-hidden="true">
+      <div class="absolute left-0 top-6 w-[62%]" data-reveal="scale" style="--d: 200ms">
+        <Image
+          src={kronebro}
+          alt=""
+          width={300}
+          loading="eager"
+          class="card float-slow w-full object-cover shadow-lift"
+        />
+      </div>
+      <div class="absolute right-0 top-[38%] w-[56%]" data-reveal="scale" style="--d: 350ms">
+        <Image
+          src={implantat}
+          alt=""
+          width={300}
+          loading="eager"
+          class="card float-slower w-full object-cover shadow-lift"
+        />
+      </div>
+      <div class="absolute bottom-0 left-[12%] w-[50%]" data-reveal="scale" style="--d: 500ms">
+        <Image
+          src={proteser}
+          alt=""
+          width={300}
+          loading="eager"
+          class="card float-slow w-full object-cover shadow-lift"
+        />
+      </div>
+    </div>
+  </div>
+</section>

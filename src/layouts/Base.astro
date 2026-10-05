@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description = site.beskrivelse } = Astro.props;
+const fullTitle = title ? `${title} – ${site.kortnavn}` : `${site.navn} – tannteknisk laboratorium i Mosjøen`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="nb">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#f8f7f4" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="nb_NO" />
+    <meta property="og:site_name" content={site.navn} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body class="min-h-screen overflow-x-hidden">
+    <a
+      href="#innhold"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:shadow-soft"
+    >
+      Hopp til innhold
+    </a>
+    <Header />
+    <main id="innhold">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      const reveals = document.querySelectorAll('[data-reveal]');
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.1 },
+      );
+      reveals.forEach((el) => observer.observe(el));
+
+      const header = document.querySelector('[data-header]');
+      const onScroll = () => header?.toggleAttribute('data-scrolled', window.scrollY > 16);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      const toggle = document.querySelector('[data-menu-toggle]');
+      const menu = document.querySelector('[data-menu]');
+      const setOpen = (open: boolean) => {
+        menu?.toggleAttribute('data-open', open);
+        toggle?.setAttribute('aria-expanded', String(open));
+      };
+      toggle?.addEventListener('click', () => setOpen(!menu?.hasAttribute('data-open')));
+      menu?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+---
+import { site } from '../data/site';
+---
+
+<section id="kontakt" class="py-20 lg:py-28">
+  <div class="container-page">
+    <div class="max-w-2xl">
+      <p class="eyebrow" data-reveal>
+        Kontakt
+      </p>
+      <h2 class="mt-4 text-4xl sm:text-5xl" data-reveal style="--d: 80ms">
+        Ta kontakt med oss i dag
+      </h2>
+    </div>
+
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      <a
+        href={site.telefonLenke}
+        class="card group p-8 transition-[transform,box-shadow] duration-500 ease-soft hover:-translate-y-1.5 hover:shadow-lift"
+        data-reveal
+      >
+        <p class="eyebrow">Telefon</p>
+        <p class="mt-4 font-display text-3xl">{site.telefon}</p>
+        <p class="mt-6 text-sm font-semibold text-brand-600">Ring oss →</p>
+      </a>
+
+      <a
+        href={`mailto:${site.epost}`}
+        class="card group p-8 transition-[transform,box-shadow] duration-500 ease-soft hover:-translate-y-1.5 hover:shadow-lift"
+        data-reveal
+        style="--d: 100ms"
+      >
+        <p class="eyebrow">E-post</p>
+        <p class="mt-4 break-words font-display text-[1.35rem] leading-9">{site.epost}</p>
+        <p class="mt-6 text-sm font-semibold text-brand-600">Send e-post →</p>
+      </a>
+
+      <a
+        href={site.kart}
+        rel="noopener"
+        class="card group p-8 transition-[transform,box-shadow] duration-500 ease-soft hover:-translate-y-1.5 hover:shadow-lift"
+        data-reveal
+        style="--d: 200ms"
+      >
+        <p class="eyebrow">Besøk oss</p>
+        <address class="mt-4 font-display text-2xl not-italic leading-snug">
+          {site.adresse}
+          <br />
+          {site.poststed}
+        </address>
+        <p class="mt-2 text-sm text-muted">{site.adresseMerknad}</p>
+        <p class="mt-6 text-sm font-semibold text-brand-600">Åpne i kart →</p>
+      </a>
+    </div>
+  </div>
+</section>

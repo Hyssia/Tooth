@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Kontakt from '../components/Kontakt.astro';
+
+export async function getStaticPaths() {
+  const produkter = await getCollection('produkter');
+  return produkter.map((produkt) => ({ params: { slug: produkt.id }, props: { produkt } }));
+}
+
+const { produkt } = Astro.props;
+const { Content } = await render(produkt);
+const andre = (await getCollection('produkter'))
+  .filter((p) => p.id !== produkt.id)
+  .sort((a, b) => a.data.rekkefolge - b.data.rekkefolge);
+---
+
+<Base title={produkt.data.tittel} description={produkt.data.ingress}>
+  <article class="pt-36 lg:pt-44">
+    <div class="container-page grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
+      <div>
+        <a href="/#produkter" class="text-sm font-semibold text-brand-600 hover:underline" data-reveal>
+          ← Alle produkter
+        </a>
+        <h1 class="mt-5 text-5xl sm:text-6xl" data-reveal style="--d: 80ms">
+          {produkt.data.tittel}
+        </h1>
+        <p class="mt-6 text-xl leading-relaxed text-muted" data-reveal style="--d: 160ms">
+          {produkt.data.ingress}
+        </p>
+        <div class="prose-produkt mt-8" data-reveal style="--d: 240ms">
+          <Content />
+        </div>
+      </div>
+
+      <div class="lg:sticky lg:top-28 lg:self-start" data-reveal="scale" style="--d: 200ms">
+        <Image
+          src={produkt.data.bilde}
+          alt={produkt.data.tittel}
+          width={600}
+          loading="eager"
+          class="card w-full object-cover shadow-lift"
+        />
+      </div>
+    </div>
+
+    <nav aria-label="Andre produkter" class="container-page mt-20">
+      <p class="eyebrow">Andre produkter</p>
+      <ul class="mt-4 flex flex-wrap gap-3">
+        {andre.map((p) => (
+          <li>
+            <a href={`/${p.id}`} class="btn btn-ghost">
+              {p.data.tittel}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </article>
+
+  <Kontakt />
+</Base>

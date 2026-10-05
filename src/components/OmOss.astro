@@ -1,0 +1,33 @@
+---
+import { historie } from '../data/site';
+---
+
+<section id="om-oss" class="py-20 lg:py-28">
+  <div class="container-page grid gap-14 lg:grid-cols-[0.9fr_1.1fr]">
+    <div class="lg:sticky lg:top-28 lg:self-start">
+      <p class="eyebrow" data-reveal>
+        Om oss
+      </p>
+      <h2 class="mt-4 text-4xl sm:text-5xl" data-reveal style="--d: 80ms">
+        Fagfolk i Mosjøen siden 1981
+      </h2>
+      <p class="mt-6 text-lg leading-relaxed text-muted" data-reveal style="--d: 160ms">
+        I 1977 begynte Sverre O. Kjærvik i lære hos tanntekniker-mester Lajos Galambos i Mosjøen. Fire år senere overtok
+        han driften, og bedriften fikk navnet Midt Norge Dental.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted" data-reveal style="--d: 220ms">
+        Sissel Kjærvik har vært med i faget siden 1973 – og er fremdeles med!
+      </p>
+    </div>
+
+    <ol class="relative border-l border-line pl-8">
+      {historie.map((punkt) => (
+        <li class="relative pb-10 last:pb-0" data-reveal>
+          <span class="absolute -left-[2.4rem] top-1.5 size-3 rounded-full border-2 border-brand-600 bg-paper" />
+          <p class="font-display text-2xl text-brand-600">{punkt.aar}</p>
+          <p class="mt-1 leading-relaxed text-muted">{punkt.tekst}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

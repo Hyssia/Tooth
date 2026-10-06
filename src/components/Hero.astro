@@ -4,6 +4,7 @@ import kronebro from '../assets/produkter/kronebro.jpg';
 import implantat from '../assets/produkter/implantat.jpg';
 import proteser from '../assets/produkter/proteser.jpg';
 import { site } from '../data/site';
+import { url } from '../utils/url';
 ---
 
 <section class="relative overflow-hidden pb-20 pt-36 lg:pb-32 lg:pt-48">
@@ -24,10 +25,10 @@ import { site } from '../data/site';
         {site.beskrivelse}
       </p>
       <div class="mt-9 flex flex-wrap gap-3" data-reveal style="--d: 240ms">
-        <a href="/#kontakt" class="btn btn-primary">
+        <a href={url('/#kontakt')} class="btn btn-primary">
           Ta kontakt med oss i dag
         </a>
-        <a href="/#produkter" class="btn btn-ghost">
+        <a href={url('/#produkter')} class="btn btn-ghost">
           Se produktene
         </a>
       </div>

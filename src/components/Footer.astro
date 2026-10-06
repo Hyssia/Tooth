@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { meny, site } from '../data/site';
+import { url } from '../utils/url';
 
 const produkter = (await getCollection('produkter')).sort((a, b) => a.data.rekkefolge - b.data.rekkefolge);
 ---
@@ -17,7 +18,7 @@ const produkter = (await getCollection('produkter')).sort((a, b) => a.data.rekke
       <ul class="mt-4 space-y-2 text-sm">
         {meny.map((punkt) => (
           <li>
-            <a href={punkt.href} class="hover:text-white">
+            <a href={url(punkt.href)} class="hover:text-white">
               {punkt.tekst}
             </a>
           </li>
@@ -30,7 +31,7 @@ const produkter = (await getCollection('produkter')).sort((a, b) => a.data.rekke
       <ul class="mt-4 space-y-2 text-sm">
         {produkter.map((p) => (
           <li>
-            <a href={`/${p.id}`} class="hover:text-white">
+            <a href={url(`/${p.id}`)} class="hover:text-white">
               {p.data.tittel}
             </a>
           </li>

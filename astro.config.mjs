@@ -7,10 +7,10 @@ export default defineConfig({
   vite: { plugins: [tailwindcss()] },
   // Gamle URL-er fra forrige nettside
   redirects: {
-    '/hjem': '/',
-    '/om-oss': '/#om-oss',
-    '/digital-produksjon-1': '/#digital-produksjon',
-    '/ansatte-1': '/#ansatte',
-    '/kontakt': '/#kontakt',
+    '/hjem': '/Tooth/',
+    '/om-oss': '/Tooth/#om-oss',
+    '/digital-produksjon-1': '/Tooth/#digital-produksjon',
+    '/ansatte-1': '/Tooth/#ansatte',
+    '/kontakt': '/Tooth/#kontakt',
   },
 });

@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
+import { url } from '../utils/url';
 
 const produkter = (await getCollection('produkter')).sort((a, b) => a.data.rekkefolge - b.data.rekkefolge);
 ---
@@ -20,7 +21,7 @@ const produkter = (await getCollection('produkter')).sort((a, b) => a.data.rekke
       {produkter.map((p, i) => (
         <li data-reveal style={`--d: ${(i % 3) * 100}ms`}>
           <a
-            href={`/${p.id}`}
+            href={url(`/${p.id}`)}
             class="card group flex h-full flex-col overflow-hidden bg-paper transition-[transform,box-shadow] duration-500 ease-soft hover:-translate-y-1.5 hover:shadow-lift"
           >
             <div class="aspect-[3/2] overflow-hidden">

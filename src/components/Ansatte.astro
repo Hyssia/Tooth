@@ -20,8 +20,8 @@ const bildeFor = (navn: string) => bilder[`../assets/ansatte/${navn}.jpg`].defau
 
     <ul class="mt-12 grid grid-cols-2 gap-x-5 gap-y-10 md:grid-cols-3 lg:grid-cols-6">
       {ansatte.map((person, i) => (
-        <li data-reveal style={`--d: ${i * 70}ms`}>
-          <div class="overflow-hidden rounded-3xl bg-paper">
+        <li class="group" data-reveal style={`--d: ${i * 70}ms`}>
+          <div class="overflow-hidden rounded-3xl bg-paper transition-[transform,box-shadow] duration-500 ease-soft group-hover:-translate-y-1.5 group-hover:shadow-lift">
             <Image
               src={bildeFor(person.bilde)}
               alt={`Portrett av ${person.navn}`}
@@ -29,10 +29,10 @@ const bildeFor = (navn: string) => bilder[`../assets/ansatte/${navn}.jpg`].defau
               height={750}
               fit="cover"
               position="top"
-              class="aspect-[4/5] w-full object-cover transition-transform duration-700 ease-soft hover:scale-105"
+              class="aspect-[4/5] w-full object-cover transition-transform duration-700 ease-soft group-hover:scale-105"
             />
           </div>
-          <p class="mt-4 font-display text-xl">{person.navn}</p>
+          <p class="mt-4 font-display text-xl transition-colors duration-300 group-hover:text-brand-600">{person.navn}</p>
           {person.tittel && <p class="text-sm text-muted">{person.tittel}</p>}
         </li>
       ))}

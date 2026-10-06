@@ -55,53 +55,65 @@ const tall = [
 </section>
 
 <script>
-  // Animasjonene hoppes over ved redusert bevegelse; innholdet står da ferdig i HTML.
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Kjører ved første innlasting og etter hver sideovergang (ClientRouter).
+  let cleanup: (() => void) | undefined;
 
-  // Teller opp tallene når de kommer til syne.
-  const counters = document.querySelectorAll<HTMLElement>('[data-count]');
-  if (counters.length && !reduced) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          io.unobserve(entry.target);
-          const el = entry.target as HTMLElement;
-          const end = Number(el.dataset.count);
-          const start = performance.now();
-          const tick = (now: number) => {
-            const t = Math.min(1, (now - start) / 1400);
-            el.textContent = String(Math.round(end * (1 - Math.pow(1 - t, 3))));
-            if (t < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.6 },
-    );
-    counters.forEach((el) => {
-      el.textContent = '0';
-      io.observe(el);
-    });
-  }
+  document.addEventListener('astro:page-load', () => {
+    cleanup?.();
+    cleanup = undefined;
 
-  // Tegner tidslinjen etter hvert som man scroller.
-  const tl = document.querySelector<HTMLElement>('[data-timeline]');
-  if (tl && !reduced) {
-    let ticking = false;
-    const update = () => {
-      const r = tl.getBoundingClientRect();
-      const p = Math.min(1, Math.max(0, (window.innerHeight * 0.65 - r.top) / r.height));
-      tl.style.setProperty('--p', p.toFixed(3));
-      ticking = false;
-    };
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    update();
-  }
+    // Animasjonene hoppes over ved redusert bevegelse; innholdet står da ferdig i HTML.
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Teller opp tallene når de kommer til syne.
+    const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+    if (counters.length && !reduced) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            io.unobserve(entry.target);
+            const el = entry.target as HTMLElement;
+            const end = Number(el.dataset.count);
+            const start = performance.now();
+            const tick = (now: number) => {
+              const t = Math.min(1, (now - start) / 1400);
+              el.textContent = String(Math.round(end * (1 - Math.pow(1 - t, 3))));
+              if (t < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          }
+        },
+        { threshold: 0.6 },
+      );
+      counters.forEach((el) => {
+        el.textContent = '0';
+        io.observe(el);
+      });
+    }
+
+    // Tegner tidslinjen etter hvert som man scroller.
+    const tl = document.querySelector<HTMLElement>('[data-timeline]');
+    if (tl && !reduced) {
+      let ticking = false;
+      const update = () => {
+        const r = tl.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, (window.innerHeight * 0.65 - r.top) / r.height));
+        tl.style.setProperty('--p', p.toFixed(3));
+        ticking = false;
+      };
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      cleanup = () => {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', onScroll);
+      };
+      update();
+    }
+  });
 </script>

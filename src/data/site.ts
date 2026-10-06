@@ -23,7 +23,7 @@ export const meny = [
 
 // Bildefilen ligger i src/assets/ansatte/<bilde>.jpg
 export const ansatte = [
-  { navn: 'Sverre Olav', tittel: 'Daglig leder', bilde: 'sverre-olav' },
+  { navn: 'Sverre Olav', tittel: '' /* 'Daglig leder' */, bilde: 'sverre-olav' },
   { navn: 'Sissel', tittel: '', bilde: 'sissel' },
   { navn: 'Frode', tittel: '', bilde: 'frode' },
   { navn: 'Mona', tittel: '', bilde: 'mona' },

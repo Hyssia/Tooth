@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  site: 'hyssia.github.io',
-  base: 'Tooth',
+  site: 'https://hyssia.github.io',
+  base: '/Tooth',
   vite: { plugins: [tailwindcss()] },
   // Gamle URL-er fra forrige nettside
   redirects: {

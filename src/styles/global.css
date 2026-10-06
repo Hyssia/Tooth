@@ -157,6 +157,25 @@
     transform: none;
   }
 
+  /* Tidslinje: linjen tegnes via --p (0–1) som settes av script i OmOss.astro.
+     Uten JS eller ved redusert bevegelse er linjen helt synlig. */
+  html.js [data-timeline] {
+    --p: 0;
+  }
+  .tl-line {
+    transform: scaleY(var(--p, 1));
+    transition: transform 0.15s linear;
+  }
+  .tl-dot {
+    transition:
+      background-color 0.5s var(--ease-soft),
+      transform 0.5s var(--ease-soft);
+  }
+  html.js [data-reveal].is-visible .tl-dot {
+    background-color: var(--color-brand-600);
+    transform: scale(1.2);
+  }
+
   .float-slow {
     animation: float 9s ease-in-out infinite;
   }

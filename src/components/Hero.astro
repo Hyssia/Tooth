@@ -7,7 +7,10 @@ import { site } from '../data/site';
 import { url } from '../utils/url';
 ---
 
-<section class="relative flex min-h-screen min-h-svh flex-col justify-center overflow-hidden pb-20 pt-28 lg:pb-32 lg:pt-40">
+<section
+  style="--dur: 300ms"
+  class="relative flex min-h-screen min-h-svh flex-col justify-center overflow-hidden pb-20 pt-28 lg:pb-32 lg:pt-40"
+>
   <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
     <div class="float-slow absolute -right-32 -top-32 size-[34rem] rounded-full bg-brand-200/50 blur-3xl"></div>
     <div class="float-slower absolute -left-40 top-64 size-[28rem] rounded-full bg-[#f0e6d6]/70 blur-3xl"></div>
@@ -18,13 +21,13 @@ import { url } from '../utils/url';
       <p class="eyebrow" data-reveal>
         Autorisert tannteknisk laboratorium
       </p>
-      <h1 class="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl" data-reveal style="--d: 80ms">
+      <h1 class="mt-5 text-5xl leading-[1.05] sm:text-6xl lg:text-7xl" data-reveal>
         Tannteknikk av høy kvalitet, fra Mosjøen
       </h1>
-      <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted" data-reveal style="--d: 160ms">
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted" data-reveal>
         {site.beskrivelse}
       </p>
-      <div class="mt-9 flex flex-wrap gap-3" data-reveal style="--d: 240ms">
+      <div class="mt-9 flex flex-wrap gap-3" data-reveal>
         <a href={url('/#kontakt')} class="btn btn-primary">
           Ta kontakt med oss i dag
         </a>
@@ -35,7 +38,7 @@ import { url } from '../utils/url';
     </div>
 
     <div class="relative mx-auto hidden aspect-square w-full max-w-md lg:block" aria-hidden="true">
-      <div class="absolute left-0 top-6 w-[62%]" data-reveal="scale" style="--d: 200ms">
+      <div class="absolute left-0 top-6 w-[62%]" data-reveal="scale">
         <Image
           src={kronebro}
           alt=""
@@ -44,7 +47,7 @@ import { url } from '../utils/url';
           class="card float-slow w-full object-cover shadow-lift"
         />
       </div>
-      <div class="absolute right-0 top-[38%] w-[56%]" data-reveal="scale" style="--d: 350ms">
+      <div class="absolute right-0 top-[38%] w-[56%]" data-reveal="scale">
         <Image
           src={implantat}
           alt=""
@@ -53,7 +56,7 @@ import { url } from '../utils/url';
           class="card float-slower w-full object-cover shadow-lift"
         />
       </div>
-      <div class="absolute bottom-0 left-[12%] w-[50%]" data-reveal="scale" style="--d: 500ms">
+      <div class="absolute bottom-0 left-[12%] w-[50%]" data-reveal="scale">
         <Image
           src={proteser}
           alt=""

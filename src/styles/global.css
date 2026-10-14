@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter";
-@import "@fontsource-variable/fraunces";
+/* opsz-varianten gir optisk størrelse: overskriftene tegnes for den størrelsen de vises i. */
+@import "@fontsource-variable/fraunces/opsz.css";
 
 @theme {
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
@@ -47,8 +48,18 @@
   h3 {
     font-family: var(--font-display);
     font-weight: 500;
-    letter-spacing: -0.015em;
     text-wrap: balance;
+  }
+
+  /* Tracking følger størrelsen: store overskrifter strammes mest. */
+  h1 {
+    letter-spacing: -0.025em;
+  }
+  h2 {
+    letter-spacing: -0.02em;
+  }
+  h3 {
+    letter-spacing: -0.01em;
   }
 
   :focus-visible {
@@ -84,27 +95,27 @@
     font-weight: 600;
     font-size: 0.95rem;
     transition:
-      transform 0.4s var(--ease-soft),
-      box-shadow 0.4s var(--ease-soft),
-      background-color 0.25s,
-      border-color 0.25s;
-  }
-  .btn:hover {
-    transform: translateY(-2px);
+      translate 0.3s var(--ease-soft),
+      scale 0.1s ease-out,
+      box-shadow 0.3s var(--ease-soft),
+      background-color 0.2s,
+      border-color 0.2s;
   }
   .btn-primary {
     background: var(--color-brand-600);
     color: white;
     box-shadow: 0 8px 24px -8px rgb(47 85 164 / 0.55);
   }
-  .btn-primary:hover {
+  .btn-primary:hover,
+  .btn-primary:active {
     background: var(--color-brand-700);
   }
   .btn-ghost {
     background: white;
     border: 1px solid var(--color-line);
   }
-  .btn-ghost:hover {
+  .btn-ghost:hover,
+  .btn-ghost:active {
     border-color: var(--color-brand-300);
   }
 
@@ -113,6 +124,19 @@
     border: 1px solid var(--color-line);
     border-radius: 1.5rem;
     box-shadow: var(--shadow-soft);
+  }
+
+  /* Klikkbare kort: løftes ved hover og trykkes inn ved trykk. */
+  .lift {
+    transition:
+      translate 0.3s var(--ease-soft),
+      scale 0.1s ease-out,
+      box-shadow 0.3s var(--ease-soft);
+  }
+
+  /* Mobilmenyen vokser ut fra menyknappen øverst til høyre. */
+  .menu-panel {
+    transform-origin: top right;
   }
 
   /* Tekst fra markdown på produktsidene */
@@ -131,6 +155,53 @@
   }
 }
 
+/* Hover kun på enheter som faktisk har hover, ellers blir løftet hengende etter et trykk på mobil. */
+@media (hover: hover) {
+  .btn:hover {
+    translate: 0 -2px;
+  }
+  .lift:hover {
+    translate: 0 -0.375rem;
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* Umiddelbar respons når man trykker. */
+.btn:active,
+.lift:active {
+  translate: none;
+  scale: 0.97;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .lift {
+    translate: none !important;
+    scale: none !important;
+  }
+  .btn:active,
+  .lift:active {
+    opacity: 0.85;
+  }
+}
+
+/* Gjennomsiktig header blir helt dekkende for dem som har bedt om mindre gjennomsiktighet eller mer kontrast. */
+@media (prefers-reduced-transparency: reduce) {
+  [data-header][data-scrolled] {
+    background-color: var(--color-paper);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+@media (prefers-contrast: more) {
+  [data-header][data-scrolled] {
+    background-color: var(--color-paper);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: 0 1px 0 var(--color-ink);
+  }
+}
+
 /* Scroll-animasjoner. Skjules kun når JS kjører (html.js), så innholdet
    alltid er synlig uten JavaScript eller med redusert bevegelse. */
 @media (prefers-reduced-motion: no-preference) {
@@ -140,10 +211,10 @@
 
   html.js [data-reveal] {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(20px);
     transition:
-      opacity 0.9s var(--ease-soft),
-      transform 0.9s var(--ease-soft);
+      opacity var(--dur, 0.5s) var(--ease-soft),
+      transform var(--dur, 0.5s) var(--ease-soft);
     transition-delay: var(--d, 0ms);
   }
   html.js [data-reveal="fade"] {
@@ -168,12 +239,41 @@
   }
   .tl-dot {
     transition:
-      background-color 0.5s var(--ease-soft),
-      transform 0.5s var(--ease-soft);
+      background-color 0.3s var(--ease-soft),
+      transform 0.3s var(--ease-soft);
   }
   html.js [data-reveal].is-visible .tl-dot {
     background-color: var(--color-brand-600);
     transform: scale(1.2);
+  }
+
+  /* Mobilmenyen: tones og skaleres inn. Nettlesere uten @starting-style viser den bare direkte. */
+  .menu-panel {
+    opacity: 0;
+    scale: 0.96;
+    transition-property: opacity, scale, display;
+    transition-duration: 0.2s;
+    transition-timing-function: var(--ease-soft);
+    transition-behavior: allow-discrete;
+  }
+  .menu-panel[data-open] {
+    opacity: 1;
+    scale: 1;
+  }
+  @starting-style {
+    .menu-panel[data-open] {
+      opacity: 0;
+      scale: 0.96;
+    }
+  }
+
+  /* Bilder som glir mellom sider (transition:name): myk bevegelse uten overshoot. Sideovergangen (root) beholder standarden. */
+  ::view-transition-group(*) {
+    animation-duration: 0.4s;
+    animation-timing-function: var(--ease-soft);
+  }
+  ::view-transition-group(root) {
+    animation-duration: 0.25s;
   }
 
   .float-slow {

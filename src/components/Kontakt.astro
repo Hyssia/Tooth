@@ -14,43 +14,34 @@ import { site } from '../data/site';
     </div>
 
     <div class="mt-12 grid gap-6 md:grid-cols-3">
-      <a
-        href={site.telefonLenke}
-        class="card group p-8 transition-[transform,box-shadow] duration-500 ease-soft hover:-translate-y-1.5 hover:shadow-lift"
-        data-reveal
-      >
-        <p class="eyebrow">Telefon</p>
-        <p class="mt-4 font-display text-3xl">{site.telefon}</p>
-        <p class="mt-6 text-sm font-semibold text-brand-600">Ring oss →</p>
-      </a>
+      <div data-reveal>
+        <a href={site.telefonLenke} class="card lift group block h-full p-8">
+          <p class="eyebrow">Telefon</p>
+          <p class="mt-4 font-display text-3xl">{site.telefon}</p>
+          <p class="mt-6 text-sm font-semibold text-brand-600">Ring oss →</p>
+        </a>
+      </div>
 
-      <a
-        href={`mailto:${site.epost}`}
-        class="card group p-8 transition-[transform,box-shadow] duration-500 ease-soft hover:-translate-y-1.5 hover:shadow-lift"
-        data-reveal
-        style="--d: 100ms"
-      >
-        <p class="eyebrow">E-post</p>
-        <p class="mt-4 break-words font-display text-[1.35rem] leading-9">{site.epost}</p>
-        <p class="mt-6 text-sm font-semibold text-brand-600">Send e-post →</p>
-      </a>
+      <div data-reveal style="--d: 60ms">
+        <a href={`mailto:${site.epost}`} class="card lift group block h-full p-8">
+          <p class="eyebrow">E-post</p>
+          <p class="mt-4 break-words font-display text-[1.35rem] leading-9">{site.epost}</p>
+          <p class="mt-6 text-sm font-semibold text-brand-600">Send e-post →</p>
+        </a>
+      </div>
 
-      <a
-        href={site.kart}
-        rel="noopener"
-        class="card group p-8 transition-[transform,box-shadow] duration-500 ease-soft hover:-translate-y-1.5 hover:shadow-lift"
-        data-reveal
-        style="--d: 200ms"
-      >
-        <p class="eyebrow">Besøk oss</p>
-        <address class="mt-4 font-display text-2xl not-italic leading-snug">
-          {site.adresse}
-          <br />
-          {site.poststed}
-        </address>
-        <p class="mt-2 text-sm text-muted">{site.adresseMerknad}</p>
-        <p class="mt-6 text-sm font-semibold text-brand-600">Åpne i kart →</p>
-      </a>
+      <div data-reveal style="--d: 120ms">
+        <a href={site.kart} rel="noopener" class="card lift group block h-full p-8">
+          <p class="eyebrow">Besøk oss</p>
+          <address class="mt-4 font-display text-2xl not-italic leading-snug">
+            {site.adresse}
+            <br />
+            {site.poststed}
+          </address>
+          <p class="mt-2 text-sm text-muted">{site.adresseMerknad}</p>
+          <p class="mt-6 text-sm font-semibold text-brand-600">Åpne i kart →</p>
+        </a>
+      </div>
     </div>
   </div>
 </section>

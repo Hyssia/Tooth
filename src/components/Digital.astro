@@ -34,11 +34,7 @@ const fakta = [
 
         <dl class="grid grid-cols-2 gap-4 self-center">
           {fakta.map((f, i) => (
-            <div
-              class="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
-              data-reveal
-              style={`--d: ${200 + i * 100}ms`}
-            >
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-6" data-reveal style={`--d: ${100 + i * 60}ms`}>
               <dt class="font-display text-3xl text-white">{f.tall}</dt>
               <dd class="mt-2 text-sm leading-relaxed text-brand-200">{f.tekst}</dd>
             </div>

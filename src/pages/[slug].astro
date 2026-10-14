@@ -43,6 +43,7 @@ const andre = (await getCollection('produkter'))
           loading="eager"
           class="card w-full object-cover shadow-lift"
           transition:name={`produkt-${produkt.id}`}
+          transition:animate="initial"
           data-morph
         />
       </div>

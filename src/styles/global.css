@@ -267,6 +267,15 @@
     }
   }
 
+  /* Bilder som glir mellom sider (transition:name): myk bevegelse uten overshoot. Sideovergangen (root) beholder standarden. */
+  ::view-transition-group(*) {
+    animation-duration: 0.4s;
+    animation-timing-function: var(--ease-soft);
+  }
+  ::view-transition-group(root) {
+    animation-duration: 0.25s;
+  }
+
   .float-slow {
     animation: float 9s ease-in-out infinite;
   }

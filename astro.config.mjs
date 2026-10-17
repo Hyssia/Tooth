@@ -10,7 +10,7 @@ export default defineConfig({
     '/hjem': '/Tooth/',
     '/om-oss': '/Tooth/#om-oss',
     '/digital-produksjon-1': '/Tooth/#digital-produksjon',
-    '/ansatte-1': '/Tooth/#ansatte',
+    '/ansatte-1': '/Tooth/',
     '/kontakt': '/Tooth/#kontakt',
   },
 });

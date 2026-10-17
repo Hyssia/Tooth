@@ -18,18 +18,7 @@ export const meny = [
   { tekst: 'Om oss', href: '/#om-oss' },
   { tekst: 'Produkter', href: '/#produkter' },
   { tekst: 'Digital produksjon', href: '/#digital-produksjon' },
-  { tekst: 'Ansatte', href: '/#ansatte' },
   { tekst: 'Kontakt', href: '/#kontakt' },
-];
-
-// Bildefilen ligger i src/assets/ansatte/<bilde>.jpg
-export const ansatte = [
-  { navn: 'Sverre Olav', tittel: '' /* 'Daglig leder' */, bilde: 'sverre-olav' },
-  { navn: 'Sissel', tittel: '', bilde: 'sissel' },
-  { navn: 'Frode', tittel: '', bilde: 'frode' },
-  { navn: 'Mona', tittel: '', bilde: 'mona' },
-  { navn: 'Anne Marie', tittel: '', bilde: 'anne-marie' },
-  { navn: 'Anette', tittel: '', bilde: 'anette' },
 ];
 
 export const historie = [

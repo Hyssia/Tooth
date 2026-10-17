@@ -1,5 +1,6 @@
 export const site = {
   navn: 'Midt Norge Dental AS',
+  orgnr: '977 529 271',
   kortnavn: 'Midt Norge Dental',
   beskrivelse:
     'Midt Norge Dental er et autorisert tannteknisk laboratorium som holder til i Mosjøen. Vi leverer tanntekniske produkter av høy kvalitet til hele Norge.',

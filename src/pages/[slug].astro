@@ -46,6 +46,12 @@ const andre = (await getCollection('produkter'))
           transition:animate="initial"
           data-morph
         />
+        {produkt.data.galleri?.map((g) => (
+          <figure class="mt-6">
+            <Image src={g.bilde} alt={g.tekst} width={600} class="card w-full object-cover" />
+            <figcaption class="mt-2 text-sm text-muted">{g.tekst}</figcaption>
+          </figure>
+        ))}
       </div>
     </div>
 

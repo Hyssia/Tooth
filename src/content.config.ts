@@ -10,6 +10,7 @@ const produkter = defineCollection({
       ingress: z.string(),
       bilde: image(),
       rekkefolge: z.number(),
+      galleri: z.array(z.object({ bilde: image(), tekst: z.string() })).optional(),
     }),
 });
 
